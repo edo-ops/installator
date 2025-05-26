@@ -1,6 +1,6 @@
 # Installator
 
-script d'installation de logiciel sur debian 12
+Projet de script d'installation de logiciel sur debian 12
 
 ---
 
