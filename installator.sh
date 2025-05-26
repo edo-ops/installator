@@ -159,6 +159,12 @@ sudo chmod +x install_xivo.sh
 sudo ./install_xivo.sh
 }
 
+# Fonction d'installation sambaAD
+function install_sambaAD() {
+sudo chmod +x install_sambaAD.sh
+sudo ./install_sambaAD
+}
+
 # Boucle principale
 while true; do
     show_banner
@@ -167,7 +173,8 @@ while true; do
     echo "1) GLPI"
     echo "2) Zabbix"
     echo "3) Xivo"
-    echo "4) Quitter"
+    echo "4) SambaAD"
+    echo "5) Quitter"
     echo
     read -p "Votre choix : " choice
 
@@ -185,6 +192,10 @@ while true; do
             read -p "${GREEN}Appuyez sur Entrée pour revenir au menu...${RESET}"
             ;;
         4)
+            install_sambaAD
+            read -p "${GREEN}Appuyez sur Entrée pour revenir au menu...${RESET}"
+            ;;
+        5)
             echo -e "${YELLOW}Au revoir !${RESET}"
             exit 0
             ;;
