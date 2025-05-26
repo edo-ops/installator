@@ -1,11 +1,4 @@
 # installator
-script d'installation de logiciel sur debian 12
-
-GLPI, Zabbix et wordpress s'installent avec apache et peuvent cohabiter sur la meme machine.
-
-Xivo s'installe avec docker et prend le port 80, vous ne pourrez donc pas le faire tourner avec les autres.
-
-
 
 
 <p align="center" style="margin-top: 200px; margin-bottom: 100px;">
@@ -13,7 +6,11 @@ Xivo s'installe avec docker et prend le port 80, vous ne pourrez donc pas le fai
 </p>
 
 
+script d'installation de logiciel sur debian 12
 
+GLPI, Zabbix et wordpress s'installent avec apache et peuvent cohabiter sur la meme machine.
+
+Xivo s'installe avec docker et prend le port 80, vous ne pourrez donc pas le faire tourner avec les autres.
 
 Pré-requis :
 ```
