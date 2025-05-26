@@ -49,7 +49,7 @@ show_banner() {
 EOF
     echo -e "${RESET}"
     echo -e "${DIM}${CYAN}┌─────────────────────────────────────────────────────────────────┐${RESET}"
-    echo -e "${DIM}${CYAN}│ ${GEAR} Compatible avec Debian 12                                     │${RESET}"
+    echo -e "${DIM}${CYAN}│ ${GEAR}  Compatible avec Debian 12                                     │${RESET}"
     echo -e "${DIM}${CYAN}│ ${ROCKET} Installation automatisée et optimisée                        │${RESET}"
     echo -e "${DIM}${CYAN}└─────────────────────────────────────────────────────────────────┘${RESET}"
     echo
