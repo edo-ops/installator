@@ -44,7 +44,7 @@ show_banner() {
 ....####.##....##..######.....##....##.....##.########.########...
 
                   INSTALLATEUR MULTI-SERVICES                   
-                         Version 1.0                     
+                         Version 2.0                     
                                                                    
 EOF
     echo -e "${RESET}"
