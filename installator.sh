@@ -162,13 +162,13 @@ sudo ./install_xivo.sh
 # Fonction d'installation sambaAD
 function install_sambaAD() {
 sudo chmod +x install_sambaAD.sh
-sudo ./install_sambaAD
+sudo ./install_sambaAD.sh
 }
 
 # Fonction d'installation Wordpress
 function install_wordpress() {
 sudo chmod +x install_wordpress.sh
-sudo ./install_wordpress
+sudo ./install_wordpress.sh
 }
 
 # Boucle principale
