@@ -1,4 +1,4 @@
-# Mon Projet
+# Installator
 
 script d'installation de logiciel sur debian 12
 
