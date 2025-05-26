@@ -137,7 +137,7 @@ install_glpi() {
     if [[ -f "install_glpi.sh" ]]; then
         sudo chmod +x install_glpi.sh
         print_step "Lancement de l'installation glpi..."
-        sudo ./install_glpi.sh
+        ./install_glpi.sh
         print_success "Installation glpi terminée"
     else
         print_error "Fichier install_glpi.sh non trouvé"
@@ -152,7 +152,7 @@ install_zabbix() {
     if [[ -f "install_zabbix.sh" ]]; then
         sudo chmod +x install_zabbix.sh
         print_step "Lancement de l'installation Zabbix..."
-        sudo ./install_zabbix.sh
+        ./install_zabbix.sh
         print_success "Installation Zabbix terminée"
     else
         print_error "Fichier install_zabbix.sh non trouvé"
@@ -230,7 +230,7 @@ confirm_installation() {
     echo -e "${YELLOW}${BOLD}⚠ Vous êtes sur le point d'installer : ${service}${RESET}"
     echo -e "${DIM}Cette opération peut prendre plusieurs minutes.${RESET}"
     echo
-    read -p "${BOLD}Confirmer l'installation ? (o/N) : ${RESET}" confirm
+    read -p "Confirmer l'installation ? (o/N) : " confirm
     [[ "$confirm" =~ ^[oO]$ ]]
 }
 
@@ -253,7 +253,7 @@ while true; do
                 print_warning "Installation annulée"
             fi
             echo
-            read -p "${GREEN}${BOLD}Appuyez sur Entrée pour revenir au menu...${RESET}"
+            read -p "Appuyez sur Entrée pour revenir au menu..."
             ;;
         2)
             if confirm_installation "Zabbix"; then
@@ -262,7 +262,7 @@ while true; do
                 print_warning "Installation annulée"
             fi
             echo
-            read -p "${GREEN}${BOLD}Appuyez sur Entrée pour revenir au menu...${RESET}"
+            read -p "Appuyez sur Entrée pour revenir au menu..."
             ;;
         3)
             if confirm_installation "XiVO"; then
@@ -271,7 +271,7 @@ while true; do
                 print_warning "Installation annulée"
             fi
             echo
-            read -p "${GREEN}${BOLD}Appuyez sur Entrée pour revenir au menu...${RESET}"
+            read -p "Appuyez sur Entrée pour revenir au menu..."
             ;;
         4)
             if confirm_installation "Samba AD"; then
@@ -280,7 +280,7 @@ while true; do
                 print_warning "Installation annulée"
             fi
             echo
-            read -p "${GREEN}${BOLD}Appuyez sur Entrée pour revenir au menu...${RESET}"
+            read -p "Appuyez sur Entrée pour revenir au menu..."
             ;;
         5)
             if confirm_installation "WordPress"; then
@@ -289,7 +289,7 @@ while true; do
                 print_warning "Installation annulée"
             fi
             echo
-            read -p "${GREEN}${BOLD}Appuyez sur Entrée pour revenir au menu...${RESET}"
+            read -p "Appuyez sur Entrée pour revenir au menu..."
             ;;
         6)
             echo
