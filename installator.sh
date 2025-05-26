@@ -327,7 +327,7 @@ install_wordpress() {
 # Menu d'affichage
 show_menu() {
     echo -e "${BOLD}${WHITE}┌─────────────────────────────────────────────────────────────────┐${RESET}"
-    echo -e "${BOLD}${WHITE}│                     QUE SOUHAITEZ-VOUS INSTALLER ?              │${RESET}"
+    echo -e "${BOLD}${WHITE}│                  QUE SOUHAITEZ-VOUS INSTALLER ?                 │${RESET}"
     echo -e "${BOLD}${WHITE}└─────────────────────────────────────────────────────────────────┘${RESET}"
     echo
     echo -e "${GREEN}${BOLD}  1)${RESET} ${STAR} GLPI          ${DIM}│ Gestion d'inventaire et helpdesk${RESET}"
