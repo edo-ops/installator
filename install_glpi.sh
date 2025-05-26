@@ -1,73 +1,57 @@
 #!/bin/bash
-print_header "INSTALLATION DE GLPI"
-    
-    # Collecte des informations
-    echo -e "${CYAN}${BOLD}Configuration de la base de données :${RESET}"
-    echo -e "${DIM}┌─────────────────────────────────────┐${RESET}"
-    read -p "${YELLOW}${BOLD}${LOCK} Nom de la base de données : ${RESET}" db_name
-    read -p "${YELLOW}${BOLD}${LOCK} Utilisateur MariaDB : ${RESET}" db_user
-    read -sp "${YELLOW}${BOLD}${LOCK} Mot de passe MariaDB : ${RESET}" db_pass
-    echo -e "${DIM}└─────────────────────────────────────┘${RESET}"
-    echo
-    
-    # Variables
-    web_root="/var/www/glpi"
-    glpi_version="10.0.11"
-    glpi_url="https://github.com/glpi-project/glpi/releases/download/${glpi_version}/glpi-${glpi_version}.tgz"
-    ip=$(ip -o -4 addr show | awk '!/127.0.0.1/ {print $4}' | cut -d/ -f1 | head -n1)
 
-    fix_system_time
+# Couleurs pour les messages
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+CYAN="\033[0;36m"
+RESET="\033[0m"
+BOLD="\033[1m"
 
-    print_step "Mise à jour du système..."
-    show_progress 30 "Mise à jour en cours"
-    sudo apt update -qq && sudo apt upgrade -y > /dev/null 2>&1
+# Lecture des paramètres utilisateur
+echo -e "${CYAN}${BOLD}Configuration de la base de données :${RESET}"
+read -p "${YELLOW}Nom de la base de données : ${RESET}" db_name
+read -p "${YELLOW}Nom d'utilisateur MySQL : ${RESET}" db_user
+read -sp "${YELLOW}Mot de passe MySQL : ${RESET}" db_pass
+echo
 
-    print_step "Installation des dépendances..."
-    show_progress 40 "Installation des paquets"
-    sudo apt install -y apache2 mariadb-server php php-curl php-gd php-intl php-mbstring php-xml php-zip php-bz2 php-mysql php-apcu php-cli php-ldap libapache2-mod-php unzip tar > /dev/null 2>&1
+# Variables
+web_root="/var/www/html/glpi"
+glpi_version="10.0.11"
+glpi_url="https://github.com/glpi-project/glpi/releases/download/${glpi_version}/glpi-${glpi_version}.tgz"
+ip=$(ip -o -4 addr show | awk '!/127.0.0.1/ {print $4}' | cut -d/ -f1 | head -n1)
 
-    print_step "Téléchargement et installation de GLPI..."
-    sudo mkdir -p "$web_root"
-    if wget -q "$glpi_url" -O /tmp/glpi.tgz; then
-        print_success "GLPI téléchargé"
-    else
-        print_error "Échec du téléchargement"
-        return 1
-    fi
-    
-    sudo tar -xzf /tmp/glpi.tgz -C /var/www/
-    sudo mv /var/www/glpi-${glpi_version}/* "$web_root"
-    sudo rm -rf /var/www/glpi-${glpi_version} /tmp/glpi.tgz
-    sudo chown -R www-data:www-data "$web_root"
-    sudo chmod -R 755 "$web_root"
+# Mise à jour du système
+echo -e "${CYAN}Mise à jour du système...${RESET}"
+sudo apt update && sudo apt upgrade -y
 
-    print_step "Configuration de MariaDB..."
-    sudo systemctl enable --now mariadb > /dev/null 2>&1
-    sudo mysql -e "CREATE DATABASE IF NOT EXISTS ${db_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" 2>/dev/null
-    sudo mysql -e "CREATE USER IF NOT EXISTS '${db_user}'@'localhost' IDENTIFIED BY '${db_pass}';" 2>/dev/null
-    sudo mysql -e "GRANT ALL PRIVILEGES ON ${db_name}.* TO '${db_user}'@'localhost';" 2>/dev/null
-    sudo mysql -e "FLUSH PRIVILEGES;" 2>/dev/null
+# Installation des paquets nécessaires
+echo -e "${CYAN}Installation des dépendances...${RESET}"
+sudo apt install -y apache2 mariadb-server php php-curl php-gd php-intl php-mbstring php-xml \
+php-zip php-bz2 php-mysql php-apcu php-cli php-ldap unzip tar libapache2-mod-php
 
-    print_step "Configuration d'Apache..."
-    sudo tee /etc/apache2/sites-available/glpi.conf > /dev/null <<EOF
-Alias /glpi $web_root
+# Téléchargement et installation de GLPI
+echo -e "${CYAN}Téléchargement de GLPI ${glpi_version}...${RESET}"
+sudo mkdir -p "$web_root"
+wget -q "$glpi_url" -O /tmp/glpi.tgz
+sudo tar -xvzf /tmp/glpi.tgz -C /tmp > /dev/null
+sudo mv /tmp/glpi/* "$web_root"
+sudo rm -rf /tmp/glpi /tmp/glpi.tgz
+sudo chown -R www-data:www-data "$web_root"
+sudo chmod -R 755 "$web_root"
 
-<Directory $web_root>
-    Options FollowSymLinks
-    AllowOverride All
-    Require all granted
-</Directory>
-EOF
+# Configuration de MariaDB
+echo -e "${CYAN}Configuration de la base de données...${RESET}"
+sudo systemctl enable --now mariadb
+sudo mysql -e "CREATE DATABASE ${db_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+sudo mysql -e "CREATE USER '${db_user}'@'localhost' IDENTIFIED BY '${db_pass}';"
+sudo mysql -e "GRANT ALL PRIVILEGES ON ${db_name}.* TO '${db_user}'@'localhost';"
+sudo mysql -e "FLUSH PRIVILEGES;"
 
-    sudo a2enmod rewrite > /dev/null 2>&1
-    sudo a2ensite glpi.conf > /dev/null 2>&1
-    sudo a2dissite 000-default.conf > /dev/null 2>&1
-    sudo systemctl reload apache2 > /dev/null 2>&1
+# Activer le module Apache rewrite et redémarrer Apache
+echo -e "${CYAN}Configuration d'Apache...${RESET}"
+sudo a2enmod rewrite
+sudo systemctl restart apache2
 
-    echo
-    print_success "Installation de GLPI terminée avec succès !"
-    echo -e "${GREEN}${BOLD}┌─────────────────────────────────────────────────────────────┐${RESET}"
-    echo -e "${GREEN}${BOLD}│ ${ROCKET} Accès : http://$ip/glpi                              │${RESET}"
-    echo -e "${GREEN}${BOLD}│ ${STAR} Finalisez la configuration via l'interface web      │${RESET}"
-    echo -e "${GREEN}${BOLD}└─────────────────────────────────────────────────────────────┘${RESET}"
-    echo
+# Message final
+echo -e "\n${GREEN}${BOLD}Installation terminée avec succès !${RESET}"
+echo -e "${GREEN}Accédez à GLPI via : http://${ip}/glpi${RESET}"
