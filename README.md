@@ -5,9 +5,9 @@ GLPI et Zabbix s'install avec apache et peuvent se mettre sur la meme machine
 Xivo s'install avec docker et prend aussi le port 80, vous ne pourrez donc pas avoir les 3 logiciels tournant sur la meme machine 
 
 
-<p align="center">
-  <![image](https://github.com/user-attachments/assets/7e3a869a-3d52-4e4f-8e31-4d46f1a3d7db)>
-</p>
+
+![image](https://github.com/user-attachments/assets/7e3a869a-3d52-4e4f-8e31-4d46f1a3d7db)
+
 
 
 Pré-requis :
