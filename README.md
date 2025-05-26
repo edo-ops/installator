@@ -25,5 +25,5 @@ Utilisation :
 git clone  https://github.com/edo-ops/installator 
 cd installator
 sudo chmod +x *.sh
-sudo ./installator.sh
+./installator.sh
 ```
