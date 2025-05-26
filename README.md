@@ -24,6 +24,6 @@ Utilisation :
 ```
 git clone  https://github.com/edo-ops/installator 
 cd installator
-sudo chmod +x installator.sh
+sudo chmod +x installator.sh install_glpi.sh install_sambaAD.sh install_wordpress.sh install_xivo.sh install_zabbix.sh
 sudo ./installator.sh
 ```
