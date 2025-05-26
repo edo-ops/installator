@@ -1,9 +1,8 @@
 # installator
-script d'installation de GLPI, Zabbix et Xivo sur debian 12
+script d'installation de logiciel sur debian 12
 
-GLPI et Zabbix s'install avec apache et peuvent se mettre sur la meme machine
-Xivo s'install avec docker et prend aussi le port 80, vous ne pourrez donc pas avoir les 3 logiciels tournant sur la meme machine 
-
+GLPI, Zabbix et wordpress s'installent avec apache et peuvent cohabiter sur la meme machine.
+Xivo s'install avec docker et prend aussi le port 80, vous ne pourrez donc pas le faire tourner avec les autres
 
 
 <p align="center">
