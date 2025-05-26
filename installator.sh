@@ -43,8 +43,8 @@ show_banner() {
 .....##..##...###.##....##....##....##.....##.##.......##.........
 ....####.##....##..######.....##....##.....##.########.########...
 
-                  INSTALLATEUR MULTI-SERVICES                   
-                         Version 2.0                     
+                     INSTALLATEUR MULTI-SERVICES                   
+                            Version 2.0                     
                                                                    
 EOF
     echo -e "${RESET}"
