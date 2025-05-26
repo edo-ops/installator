@@ -12,8 +12,6 @@ Xivo s'installe avec docker et prend le port 80, vous ne pourrez donc pas le fai
   <img src="https://github.com/user-attachments/assets/cc23e731-f399-4c8c-81a9-2cecd412f287" alt="Description de l'image" width="600"/>
 </p>
 
-![image](https://github.com/user-attachments/assets/cc23e731-f399-4c8c-81a9-2cecd412f287)
-
 
 
 
