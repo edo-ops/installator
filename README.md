@@ -6,7 +6,7 @@ Xivo s'install avec docker et prend aussi le port 80, vous ne pourrez donc pas a
 
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/user-attachments/assets/d7e82889-9235-4504-8a52-8f915ec7827a/460/300">
+  <![image](https://github.com/user-attachments/assets/7e3a869a-3d52-4e4f-8e31-4d46f1a3d7db)>
 </p>
 
 
