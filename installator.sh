@@ -165,6 +165,12 @@ sudo chmod +x install_sambaAD.sh
 sudo ./install_sambaAD
 }
 
+# Fonction d'installation Wordpress
+function install_wordpress() {
+sudo chmod +x install_wordpress.sh
+sudo ./install_wordpress
+}
+
 # Boucle principale
 while true; do
     show_banner
@@ -174,7 +180,8 @@ while true; do
     echo "2) Zabbix"
     echo "3) Xivo"
     echo "4) SambaAD"
-    echo "5) Quitter"
+    echo "5) Wordpress"
+    echo "6) Quitter"
     echo
     read -p "Votre choix : " choice
 
@@ -196,6 +203,10 @@ while true; do
             read -p "${GREEN}Appuyez sur Entrée pour revenir au menu...${RESET}"
             ;;
         5)
+            install_wordpress
+            read -p "${GREEN}Appuyez sur Entrée pour revenir au menu...${RESET}"
+            ;;
+        6)
             echo -e "${YELLOW}Au revoir !${RESET}"
             exit 0
             ;;
